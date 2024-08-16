@@ -10,18 +10,20 @@ public class MenuDataManager : MonoBehaviour{
     
     public static MenuDataManager Instance;
     public string playerName;
+    public int playerScore;
     public string recordName;
     public int recordScore;
+
     [System.Serializable]
     class SaveData{
-        public string saveName;
+        public string recordName;
         public int recordScore;
     }
     
     public void saveGame(){
         SaveData output= new SaveData();
-        output.saveName = playerName;
-        output.recordScore = recordScore;
+        output.recordName = playerName;
+        output.recordScore = playerScore;
         string json = JsonUtility.ToJson(output);
         File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
     }
@@ -32,7 +34,7 @@ public class MenuDataManager : MonoBehaviour{
         {
             string json = File.ReadAllText(path);
             SaveData data = JsonUtility.FromJson<SaveData>(json);
-            playerName = data.saveName;
+            recordName = data.recordName;
             recordScore = data.recordScore;
         }
     }
@@ -47,5 +49,6 @@ public class MenuDataManager : MonoBehaviour{
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        Instance.loadGame();
     }
 }

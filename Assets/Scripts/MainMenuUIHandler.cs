@@ -23,7 +23,7 @@ public class MainMenuUIHandler : MonoBehaviour
         // Store name
         MenuDataManager.Instance.playerName = inputField.text;
         Debug.Log(MenuDataManager.Instance.playerName);
-        // SceneManager.LoadScene(1);
+        SceneManager.LoadScene(1);
     }
 
     public void Exit()
